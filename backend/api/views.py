@@ -1,18 +1,16 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer, NoteSerializer
+from .serializers import UserSerializer, QuoteSerializer, AuthorSerializer, SourceSerializer, CategorySerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Note
+from .models import Quote
 
-
-class NoteListCreate(generics.ListCreateAPIView):
-    serializer_class = NoteSerializer
+class QuoteListCreate(generics.ListCreateAPIView):
+    serializer_class = QuoteSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        return Note.objects.filter(author=user)
+        return Quote.objects.filter(author=user)
 
     def perform_create(self, serializer):
         if serializer.is_valid():
@@ -20,15 +18,13 @@ class NoteListCreate(generics.ListCreateAPIView):
         else:
             print(serializer.errors)
 
-
-class NoteDelete(generics.DestroyAPIView):
-    serializer_class = NoteSerializer
+class QuoteDelete(generics.DestroyAPIView):
+    serializer_class = QuoteSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        return Note.objects.filter(author=user)
-
+        return Quote.objects.filter(author=user)
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
