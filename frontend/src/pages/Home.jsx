@@ -1,47 +1,47 @@
 import { useState, useEffect } from "react";
 import api from "../api";
-import Note from "../components/Note"
+import Quote from "../components/Quote"
 import "../styles/Home.css"
 
 function Home() {
-    const [notes, setNotes] = useState([]);
+    const [quotes, setQuotes] = useState([]);
     const [content, setContent] = useState("");
     const [title, setTitle] = useState("");
 
     useEffect(() => {
-        getNotes();
+        getQuotes();
     }, []);
 
-    const getNotes = () => {
+    const getQuotes = () => {
         api
-            .get("/api/notes/")
+            .get("/api/quotes/")
             .then((res) => res.data)
             .then((data) => {
-                setNotes(data);
+                setQuotes(data);
                 console.log(data);
             })
             .catch((err) => alert(err));
     };
 
-    const deleteNote = (id) => {
+    const deleteQuote = (id) => {
         api
-            .delete(`/api/notes/delete/${id}/`)
+            .delete(`/api/quotes/delete/${id}/`)
             .then((res) => {
-                if (res.status === 204) alert("Note deleted!");
-                else alert("Failed to delete note.");
-                getNotes();
+                if (res.status === 204) alert("Quote deleted!");
+                else alert("Failed to delete quote.");
+                getQuotes();
             })
             .catch((error) => alert(error));
     };
 
-    const createNote = (e) => {
+    const createQuote = (e) => {
         e.preventDefault();
         api
-            .post("/api/notes/", { content, title })
+            .post("/api/quotes/", { content, title })
             .then((res) => {
-                if (res.status === 201) alert("Note created!");
-                else alert("Failed to make note.");
-                getNotes();
+                if (res.status === 201) alert("Quote created!");
+                else alert("Failed to make Quote.");
+                getQuotes();
             })
             .catch((err) => alert(err));
     };
@@ -49,13 +49,13 @@ function Home() {
     return (
         <div>
             <div>
-                <h2>Notes</h2>
-                {notes.map((note) => (
-                    <Note note={note} onDelete={deleteNote} key={note.id} />
+                <h2>Quotes</h2>
+                {quotes.map((quote) => (
+                    <Quote quote={quote} onDelete={deleteQuote} key={quote.id} />
                 ))}
             </div>
-            <h2>Create a Note</h2>
-            <form onSubmit={createNote}>
+            <h2>Create a Quote</h2>
+            <form onSubmit={createQuote}>
                 <label htmlFor="title">Title:</label>
                 <br />
                 <input

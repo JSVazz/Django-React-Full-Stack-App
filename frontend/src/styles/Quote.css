@@ -1,19 +1,19 @@
-.note-container {
+.quote-container {
   padding: 10px;
   margin: 20px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-.note-title {
+.quote-title {
   color: #333;
 }
 
-.note-content {
+.quote-content {
   color: #666;
 }
 
-.note-date {
+.quote-date {
   color: #999;
   font-size: 0.8rem;
 }
