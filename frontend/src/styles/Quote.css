@@ -3,19 +3,37 @@
   margin: 20px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #f9f9f9; /* Light background for better readability */
 }
 
-.quote-title {
-  color: #333;
+.quote-title, .quote-author, .quote-source, .quote-source-type, .quote-category-title {
+  color: #333; /* Darker text for better readability */
+  font-weight: bold; /* Make headers bold */
 }
 
 .quote-content {
   color: #666;
+  margin-bottom: 10px;
 }
 
-.quote-date {
+.quote-author, .quote-source, .quote-source-type, .quote-source-date, .quote-category-title, .quote-category-description {
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
+.quote-category-description {
+  color: #555;
+  font-style: italic; /* Styling for category description */
+}
+
+.quote-source-date, .quote-date {
   color: #999;
   font-size: 0.8rem;
+}
+
+audio {
+  width: 100%; /* Full width audio player */
+  margin-top: 10px; /* Spacing above the audio player */
 }
 
 .delete-button {
@@ -26,6 +44,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 10px; /* Space from last element */
 }
 
 .delete-button:hover {
